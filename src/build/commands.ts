@@ -7,7 +7,6 @@ import {
   type XcodeScheme,
   generateBuildServerConfig,
   getBuildConfigurations,
-  getBuildSettingsToAskDestination,
   getBuildSettingsToLaunch,
   getIsXcbeautifyInstalled,
   getIsXcodeBuildServerInstalled,
@@ -717,16 +716,13 @@ async function commonBuildCommand(
   context.updateProgressStatus("Searching for configuration");
   const configuration = await askConfiguration(context, { xcworkspace: xcworkspace });
 
-  context.updateProgressStatus("Extracting build settings");
-  const buildSettings = await getBuildSettingsToAskDestination({
+  context.updateProgressStatus("Searching for destination");
+  const destination = await askDestinationToRunOn(context, {
     scheme: scheme,
     configuration: configuration,
     sdk: undefined,
     xcworkspace: xcworkspace,
   });
-
-  context.updateProgressStatus("Searching for destination");
-  const destination = await askDestinationToRunOn(context, buildSettings);
   const destinationRaw = getXcodeBuildDestinationString({ destination: destination });
 
   const sdk = destination.platform;
@@ -792,16 +788,13 @@ async function commonLaunchCommand(
   context.updateProgressStatus("Searching for configuration");
   const configuration = await askConfiguration(context, { xcworkspace: xcworkspace });
 
-  context.updateProgressStatus("Extracting build settings");
-  const buildSettings = await getBuildSettingsToAskDestination({
+  context.updateProgressStatus("Searching for destination");
+  const destination = await askDestinationToRunOn(context, {
     scheme: scheme,
     configuration: configuration,
     sdk: undefined,
     xcworkspace: xcworkspace,
   });
-
-  context.updateProgressStatus("Searching for destination");
-  const destination = await askDestinationToRunOn(context, buildSettings);
 
   const destinationRaw = getXcodeBuildDestinationString({ destination: destination });
 
@@ -912,16 +905,13 @@ async function commonRunCommand(
   context.updateProgressStatus("Searching for configuration");
   const configuration = await askConfiguration(context, { xcworkspace: xcworkspace });
 
-  context.updateProgressStatus("Extracting build settings");
-  const buildSettings = await getBuildSettingsToAskDestination({
+  context.updateProgressStatus("Searching for destination");
+  const destination = await askDestinationToRunOn(context, {
     scheme: scheme,
     configuration: configuration,
     sdk: undefined,
     xcworkspace: xcworkspace,
   });
-
-  context.updateProgressStatus("Searching for destination");
-  const destination = await askDestinationToRunOn(context, buildSettings);
 
   const sdk = destination.platform;
 
@@ -997,16 +987,13 @@ export async function cleanCommand(context: ExtensionContext, item?: BuildTreeIt
   context.updateProgressStatus("Searching for configuration");
   const configuration = await askConfiguration(context, { xcworkspace: xcworkspace });
 
-  context.updateProgressStatus("Extracting build settings");
-  const buildSettings = await getBuildSettingsToAskDestination({
+  context.updateProgressStatus("Searching for destination");
+  const destination = await askDestinationToRunOn(context, {
     scheme: scheme,
     configuration: configuration,
     sdk: undefined,
     xcworkspace: xcworkspace,
   });
-
-  context.updateProgressStatus("Searching for destination");
-  const destination = await askDestinationToRunOn(context, buildSettings);
   const destinationRaw = getXcodeBuildDestinationString({ destination: destination });
 
   const sdk = destination.platform;
@@ -1043,16 +1030,13 @@ export async function testCommand(context: ExtensionContext, item?: BuildTreeIte
   context.updateProgressStatus("Searching for configuration");
   const configuration = await askConfiguration(context, { xcworkspace: xcworkspace });
 
-  context.updateProgressStatus("Extracting build settings");
-  const buildSettings = await getBuildSettingsToAskDestination({
+  context.updateProgressStatus("Searching for destination");
+  const destination = await askDestinationToRunOn(context, {
     scheme: scheme,
     configuration: configuration,
     sdk: undefined,
     xcworkspace: xcworkspace,
   });
-
-  context.updateProgressStatus("Searching for destination");
-  const destination = await askDestinationToRunOn(context, buildSettings);
   const destinationRaw = getXcodeBuildDestinationString({ destination: destination });
 
   const sdk = destination.platform;
