@@ -23,12 +23,12 @@ type Config = {
   "system.enableSentry": boolean;
   "system.autoRevealTerminal": boolean;
   "system.showProgressStatusBar": boolean;
+  "system.customXcodeWorkspaceParser": boolean;
   "xcodegen.autogenerate": boolean;
   "xcodebuildserver.autogenerate": boolean;
   "tuist.autogenerate": boolean;
   "tuist.generate.env": { [key: string]: string | null };
   "testing.configuration": string;
-  "xcode.useWorkspaceParser": boolean;
 };
 
 type ConfigKey = keyof Config;
