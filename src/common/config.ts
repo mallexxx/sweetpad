@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { expandEnvVars } from "./helpers";
 
 type Config = {
   "format.path": string;

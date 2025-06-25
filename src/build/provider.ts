@@ -142,36 +142,6 @@ class ActionDispatcher {
     return destination;
   }
 
-  private async getDestinationFromDefinition(options: {
-    definition: TaskDefinition;
-    scheme: string;
-    configuration: string;
-    xcworkspace: string;
-  }): Promise<Destination> {
-    // Try to get destination from task definition first
-    try {
-      return await this.getDestination({
-        definition: options.definition,
-        buildSettings: null,
-      });
-    } catch (error) {
-      // If we can't get destination from definition, we need to get build settings
-      this.context.updateProgressStatus("Extracting build settings");
-      const buildSettings = await getBuildSettingsToAskDestination({
-        scheme: options.scheme,
-        configuration: options.configuration,
-        sdk: undefined,
-        xcworkspace: options.xcworkspace,
-      });
-
-      this.context.updateProgressStatus("Searching for destination");
-      return await this.getDestination({
-        definition: options.definition,
-        buildSettings: buildSettings,
-      });
-    }
-  }
-
   private async launchCallback(terminal: TaskTerminal, definition: TaskDefinition) {
     await this.commonLaunchCallback(terminal, definition, {
       debug: false,
